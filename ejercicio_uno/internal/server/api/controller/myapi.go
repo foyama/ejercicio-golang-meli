@@ -2,24 +2,17 @@ package controller
 
 import (
 	"ejercicio-golang-meli/ejercicio_uno/internal/models"
+	"ejercicio-golang-meli/ejercicio_uno/internal/server/http"
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func MyApi() {
-	fmt.Println("here")
 	r := gin.Default()
 	r.GET("/myapi", func(c *gin.Context) {
-		resp, err := http.Get("https://api.coingecko.com/api/v3/coins/bitcoin")
-		if err != nil {
-			log.Fatalln(err)
-		}
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := http.DoGet("https://api.coingecko.com/api/v3/coins/bitcoin")
 		if err != nil {
 			log.Fatalln(err)
 		}
